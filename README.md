@@ -1,11 +1,4 @@
-# starter-express-api
+API that is built using Node js used to fetch Football related news from all the top news websites of the world
 
-This is the simplest possible nodejs api using express that responds to any request with: 
-```
-Yo!
-```
-
-### Deploy it in 7 seconds: 
-
-[![Deploy to Cyclic](https://deploy.cyclic.app/button.svg)](https://deploy.cyclic.app/)
+To install simply run npm install
 
