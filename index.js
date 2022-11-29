@@ -1,7 +1,82 @@
-const express = require('express')
-const app = express()
-app.all('/', (req, res) => {
-    console.log("Just got a request!")
-    res.send('Yo!')
+const express = require("express");
+const axios = require("axios");
+const cheerio = require("cheerio");
+const articles = []
+
+const app = express();
+const information = [
+    {
+        name: "BBC",
+        address: "https://www.bbc.com/sport/football",
+    },
+    {
+        name: "Gaurdian",
+        address: "https://www.theguardian.com/football",
+        // base:"https://www.theguardian.com"
+    },
+    {
+        name: "SkySports",
+        address: "https://www.skysports.com/football",
+    }
+]
+
+information.forEach(info => {
+    axios.get(info.address)
+        .then(response => {
+            const html = response.data
+            const $ = cheerio.load(html)
+
+            $('a:contains("football")', html).each(function () {
+                const title = $(this).text()
+                const url = $(this).attr("href")
+
+                articles.push({
+                    title,
+                    //url:information.base+url
+                    url,
+                    source: info.name,
+                })
+            })
+
+        })
 })
-app.listen(process.env.PORT || 3000)
+
+
+app.get("/news", (req, res) => {
+    res.send(articles)
+})
+
+
+//For getting results for specific newspaper
+app.get('/news/:informationId', (req, res) => {
+    const informationId = req.params.informationId
+
+
+    const informationAddress = information.filter(info => info.name == informationId)[0].address
+    const informationBase = information.filter(info => info.name == informationId)[0].base
+
+
+    axios.get(informationAddress)
+        .then(response => {
+            const html = response.data
+            const $ = cheerio.load(html)
+            const specificArticles = []
+
+            $('a:contains("football")', html).each(function () {
+                const title = $(this).text()
+                const url = $(this).attr('href')
+                specificArticles.push({
+                    title,
+                    url: informationBase + url,
+                    source: informationId
+                })
+            })
+            res.json(specificArticles)
+        }).catch(err => console.log(err))
+})
+
+
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+    console.log("Hello from server")
+})
