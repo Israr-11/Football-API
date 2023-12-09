@@ -16,7 +16,7 @@ npm start or npm run dev
 
 Open your favorite browser and navigate to http://localhost:8080 to experience the magic 😎!
 
-The app will automatically reload as you make changes, and any lint errors will be displayed in the console.
+The server will automatically reload as you make changes, and any lint errors will be displayed in the console.
 
 ## Step 3: Testing in Postman
 
