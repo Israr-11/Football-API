@@ -1,3 +1,5 @@
+![image](https://github.com/Israr-11/Football-API/assets/91403838/e395c407-3821-4f2f-bac2-a9cf8cd6f773)
+
 API that is built using Node js used to fetch Football related news from all the top news websites of the world
 
 ## `Follow these instructions to run the API successfully`
