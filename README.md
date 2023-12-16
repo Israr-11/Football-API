@@ -20,12 +20,7 @@ The server will automatically reload as you make changes, and any lint errors wi
 
 ## Step 3: Testing in Postman
 
-Run the interactive test runner using:
-
-npm test
-
-Refer to the running tests documentation for more information.
-
+Testing the API in Postman for a thorough understanding, even though you can in the browser too using the provided link as it is deployed on the cloud server
 
 ## `🚀 Note to Repo Visitors`
 If you find this repo useful, don't forget to show some love! Give the repository a star to support the project. 🌟
